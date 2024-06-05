@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from ghidra_builtins import *
 
 
-class SimpleDiff(GhidraDiffEngine):
+class NovelDiff(GhidraDiffEngine):
     """
     An Ghidra Diff implementation using simple comparison mechanisms
     """
