@@ -293,6 +293,7 @@ class GhidraDiffEngine(GhidriffMarkdown, metaclass=ABCMeta):
 
             monitor = ConsoleTaskMonitor()
             prog = sym.program
+            # step1  got func obj
             func: 'ghidra.program.model.listing.Function' = prog.functionManager.getFunctionAt(sym.address)
 
             if not sym.symbolType == SymbolType.FUNCTION:
@@ -329,7 +330,7 @@ class GhidraDiffEngine(GhidriffMarkdown, metaclass=ABCMeta):
                 code = ''
 
                 if get_decomp_info:
-
+                    # step2 func.getBody  pseudo code or what?
                     code_units = func.getProgram().getListing().getCodeUnits(func.getBody(), True)
 
                     # instruction and mnemonic bulker
@@ -353,6 +354,9 @@ class GhidraDiffEngine(GhidriffMarkdown, metaclass=ABCMeta):
                         blocks.extend(sorted(units))
 
                     if not func.external:
+                        #
+                        # todo  decompile function when no-symbols. we need to decrease onto instructions level
+                        #
                         error, code = self.decompile_func(func.program, func, timeout,)
 
                         if error:
